@@ -100,8 +100,9 @@ export class GifsServiceService {
             this.giphy = response['data'];
           
             this.searchGiphies = []
+            this.giphies = []
 
-            if (!this.searchGiphies[0]){
+        
               // this.searchGiphies = [];
               for (let i = 0; i < response['data'].length; i++) { 
                 let title = response['data'][i]['title'];
@@ -112,7 +113,7 @@ export class GifsServiceService {
                 this.searchGiphies.push(searchGif)
   
               }
-            }
+            
 
 
            
