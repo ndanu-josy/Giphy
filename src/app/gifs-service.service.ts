@@ -10,7 +10,8 @@ import { Giphy } from '../app/giphy';
 export class GifsServiceService {
   [x: string]: any;
   giphy!: Giphy;
-  giphies:any=[]
+  giphies: any = []
+  searchGiphies: any = []
 
   // constructor(private http: HttpClient) {
   // }
@@ -47,23 +48,25 @@ export class GifsServiceService {
         .toPromise()
         .then(
           (response: { [x: string]: any }) => {
-            console.log(response);
+            // console.log(response);
 
             this.giphy = response['data'];
-            console.log(this.giphy);
-           
+            // console.log(this.giphy);
+
 
             for (let i = 0; i < response['data'].length; i++) {
-              this.giphy.title = response['data'][i]['title'];
-              this.giphy.username = response['data'][i]['username'];
-              this.giphy.imageUrl = response['data'][i]['images']['original']['url'];    
-              
-              let gif= new Giphy(this.giphy.username, this.giphy.title, this.giphy.imageUrl);
-           this.giphies.push(gif)  
-          
-          }
-            
-console.log(this.giphies[0].title)
+
+
+              let title = response['data'][i]['title'];
+              let username = response['data'][i]['username'];
+              let imageUrl = response['data'][i]['images']['original']['url'];
+
+              let gif = new Giphy(username, title, imageUrl);
+              this.giphies.push(gif)
+
+            }
+
+            // console.log(this.giphies)
 
             resolve();
           },
@@ -72,6 +75,53 @@ console.log(this.giphies[0].title)
             this.giphy.username = 'Winston Churchill';
             this.giphy.imageUrl = 'Not found';
 
+            reject(error);
+          }
+        );
+    });
+    return promise;
+  }
+  searchGiphy(searchTerm: any) {
+    interface GifResponse {
+      username: string;
+      title: string;
+      imageUrl: string;
+    }
+    let searchUrl = environment.searchGiphy + 'api_key=' + environment.api_key + '&q=' + searchTerm.value
+    console.log(searchUrl);
+
+    let promise = new Promise<void>((resolve, reject) => {
+      this.http
+        .get<GifResponse>(searchUrl)
+        .toPromise()
+        .then(
+          (response: { [x: string]: any }) => {
+
+            this.giphy = response['data'];
+          
+            this.searchGiphies = []
+
+            if (!this.searchGiphies[0]){
+              // this.searchGiphies = [];
+              for (let i = 0; i < response['data'].length; i++) { 
+                let title = response['data'][i]['title'];
+                let username = response['data'][i]['username'];
+                let imageUrl = response['data'][i]['images']['original']['url'];
+  
+                let searchGif = new Giphy(username, title, imageUrl);
+                this.searchGiphies.push(searchGif)
+  
+              }
+            }
+
+
+           
+           
+            // console.log(response)
+
+            resolve();
+          },
+          (error) => {
             reject(error);
           }
         );

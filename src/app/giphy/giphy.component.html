@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Giphy</title>
 </head> -->
-
+<!-- 
 <body>
   <div class="container">
     <h1>Giphy Search Engine</h1>
@@ -34,7 +34,7 @@
 <div class="card-body">
 <p>Title</p>
 </div>
-  </div>
+  </div> -->
   <!-- <div class="container" >
     <div class="row">
       <div class="col">
@@ -54,3 +54,51 @@
 <!-- </body> -->
 
 <!-- </html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>Giphies</h2>
+  <div class="container">
+    <hr>
+
+    <div class="form-group mx-sm-3 mb-2">
+      <input type="search" class="form-control" placeholder="Search" name="search" #searchTerm>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2" (click)="performSearch(searchTerm)">Search Giphy</button>
+    <hr>
+    <!-- <div class="row">
+      <div class="col-md-3 col-sm-12 col-lg-3  mt-2" *ngFor = 'let gif of giphies'>
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{{gif.imageUrl}}" alt="Card image cap">
+          <div class="card-body">
+            <p>Title : {{gif.title}}</p>
+            <p>Username : {{gif.username}}</p>
+            
+
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="row">
+      <div class="col-md-3 col-sm-12 col-lg-3  mt-2" *ngFor = 'let gif of searchGiphies'>
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{{gif.imageUrl}}" alt="Card image cap">
+          <div class="card-body">
+            <p>Title : {{gif.title}}</p>
+            <p>Username : {{gif.username}}</p>
+            
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

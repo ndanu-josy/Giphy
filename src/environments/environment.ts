@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   api_key:"rtWMKaOLwcDrJSAa1owERRlZKJ8Mcci4",
-  trendingEndpoint:"https://api.giphy.com/v1/gifs/trending?"
+  trendingEndpoint:"https://api.giphy.com/v1/gifs/trending?",
+  searchGiphy:"https://api.giphy.com/v1/gifs/search?"
 
 
 };

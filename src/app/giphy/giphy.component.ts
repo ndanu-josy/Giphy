@@ -9,22 +9,33 @@ import { GifsServiceService } from '../gifs-service.service';
 })
 export class GiphyComponent implements OnInit {
   // giphy!: Giphy;
-  giphies:any=[]
-gifs! :any;
+  giphies: any = []
+  searchGiphies :any = []
+  gifs!: any;
+
 
   performSearch(searchTerm: HTMLInputElement): void {
-    console.log(`User entered: ${searchTerm.value}`);
+    // this.gifService.searchGiphy(searchTerm)
+    // this.searchGiphies = this.gifService.searchGiphies
+    // console.log(this.searchGiphies);
+
+    this.gifService.searchGiphy(searchTerm).then((succes) => {
+      this.searchGiphies = this.gifService.searchGiphies;
+    },
+      (error) => {
+        console.log(error)
+      }
+    )
+    
   }
 
-  constructor(private gifService: GifsServiceService) {}
+  constructor(private gifService: GifsServiceService) { }
   ngOnInit() {
     this.gifService.giphyRequest();
     this.gifService.giphy = this.gifs;
-    this.giphies=this.gifService.giphies ;
-   
+    this.giphies = this.gifService.giphies;
 
-    
-    console.log(this.giphies);
+    // console.log(this.giphies);
 
   }
 }
